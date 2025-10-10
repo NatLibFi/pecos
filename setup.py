@@ -86,13 +86,13 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 # Requirements
 numpy_requires = [
-    'numpy>=1.19.5,<2.0.0; python_version>="3.9"'
+    'numpy>=1.19.5; python_version>="3.9"'
 ]
 setup_requires = numpy_requires + [
     'pytest-runner'
 ]
 install_requires = numpy_requires + [
-    'scipy>=1.4.1,<1.14.0',
+    'scipy>=1.15.3',
     'scikit-learn>=0.24.1',
     'torch>=2.0; python_version>="3.9"',
     'sentencepiece>=0.1.86,!=0.1.92', # 0.1.92 results in error for transformers

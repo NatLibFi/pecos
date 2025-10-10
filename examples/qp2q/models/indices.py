@@ -631,10 +631,10 @@ def get_split_wo_freq(scores, min_size):
     n = len(scores)
     indexer = scores >= 0  # Default way of assigning points to c1 and c2 by hinging at zero
     if indexer.sum() < min_size:
-        indexer = np.zeros(n, dtype=np.bool)
+        indexer = np.zeros(n, dtype=bool)
         indexer[sp.argpartition(-scores, min_size)[:min_size]] = True
     elif (~indexer).sum() < min_size:
-        indexer = np.zeros(n, dtype=np.bool)
+        indexer = np.zeros(n, dtype=bool)
         indexer[sp.argpartition(scores, min_size)[min_size:]] = True
 
     return indexer
@@ -654,7 +654,7 @@ def get_split_w_freq(scores, freqs, min_size):
     assert c1_size >= min_size or c2_size >= min_size
 
     if c1_size < min_size:
-        indexer = np.zeros(n, dtype=np.bool)
+        indexer = np.zeros(n, dtype=bool)
         ordering = np.argsort(
             -1 * scores
         )  # Sort in descending order. Elements towards beginning will be close to c1
@@ -683,7 +683,7 @@ def get_split_w_freq(scores, freqs, min_size):
 
         indexer[c1_idxs] = True
     elif c2_size < min_size:
-        indexer = np.zeros(n, dtype=np.bool)
+        indexer = np.zeros(n, dtype=bool)
         ordering = np.argsort(
             scores
         )  # Sort in ascending order. Elements towards beginning will be close to c2

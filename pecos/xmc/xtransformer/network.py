@@ -32,25 +32,11 @@ from transformers import (
     DistilBertTokenizerFast,
     DistilBertPreTrainedModel,
 )
-from transformers.file_utils import add_start_docstrings
-from transformers.modeling_utils import SequenceSummary
 
-from transformers.models.bert.modeling_bert import BERT_INPUTS_DOCSTRING, BERT_START_DOCSTRING
-from transformers.models.roberta.modeling_roberta import (
-    RobertaPreTrainedModel,
-    ROBERTA_INPUTS_DOCSTRING,
-    ROBERTA_START_DOCSTRING,
-)
-from transformers.models.xlm_roberta.modeling_xlm_roberta import XLM_ROBERTA_START_DOCSTRING
-from transformers.models.xlnet.modeling_xlnet import (
-    XLNET_INPUTS_DOCSTRING,
-    XLNET_START_DOCSTRING,
-)
-from transformers.models.distilbert.modeling_distilbert import (
-    DISTILBERT_INPUTS_DOCSTRING,
-    DISTILBERT_START_DOCSTRING,
-)
-
+from transformers.utils.doc import add_start_docstrings
+from transformers.utils import auto_docstring
+from transformers.models.xlnet.modeling_xlnet import XLNetSequenceSummary as SequenceSummary
+from transformers.models.roberta.modeling_roberta import RobertaPreTrainedModel
 
 class TransformerModelClass(object):
     """Utility class for representing a Transformer and tokenizer."""
@@ -218,10 +204,7 @@ class TransformerLinearXMCHead(nn.Module):
         return W_act, b_act
 
 
-@add_start_docstrings(
-    """Bert Model with mutli-label classification head on top for XMC.\n""",
-    BERT_START_DOCSTRING,
-)
+@auto_docstring(custom_intro="""Bert Model with mutli-label classification head on top for XMC.\n""")
 class BertForXMC(BertPreTrainedModel):
     """
     Examples:
@@ -244,7 +227,7 @@ class BertForXMC(BertPreTrainedModel):
     def init_from(self, model):
         self.bert = model.bert
 
-    @add_start_docstrings(BERT_INPUTS_DOCSTRING.format("(batch_size, sequence_length)"))
+    @auto_docstring
     def forward(
         self,
         input_ids=None,
@@ -289,10 +272,8 @@ class BertForXMC(BertPreTrainedModel):
         }
 
 
-@add_start_docstrings(
-    """Roberta Model with mutli-label classification head on top for XMC.\n""",
-    ROBERTA_START_DOCSTRING,
-)
+
+@auto_docstring(custom_intro="""Roberta Model with mutli-label classification head on top for XMC.\n""")
 class RobertaForXMC(RobertaPreTrainedModel):
     """
     Examples:
@@ -315,7 +296,7 @@ class RobertaForXMC(RobertaPreTrainedModel):
     def init_from(self, model):
         self.roberta = model.roberta
 
-    @add_start_docstrings(ROBERTA_INPUTS_DOCSTRING.format("(batch_size, sequence_length)"))
+    @auto_docstring
     def forward(
         self,
         input_ids=None,
@@ -361,10 +342,7 @@ class RobertaForXMC(RobertaPreTrainedModel):
         }
 
 
-@add_start_docstrings(
-    """XLM-Roberta Model with mutli-label classification head on top for XMC.\n""",
-    XLM_ROBERTA_START_DOCSTRING,
-)
+@auto_docstring(custom_intro="""XLM-Roberta Model with mutli-label classification head on top for XMC.\n""")
 class XLMRobertaForXMC(RobertaForXMC):
     """
     This class overrides :class:`RobertaForXMC`. Please check the superclass for the appropriate
@@ -374,10 +352,7 @@ class XLMRobertaForXMC(RobertaForXMC):
     config_class = XLMRobertaConfig  # type: ignore
 
 
-@add_start_docstrings(
-    """XLNet Model with mutli-label classification head on top for XMC.\n""",
-    XLNET_START_DOCSTRING,
-)
+@auto_docstring(custom_intro="""XLNet Model with mutli-label classification head on top for XMC.\n""")
 class XLNetForXMC(XLNetPreTrainedModel):
     """
     Examples:
@@ -400,7 +375,7 @@ class XLNetForXMC(XLNetPreTrainedModel):
     def init_from(self, model):
         self.transformer = model.transformer
 
-    @add_start_docstrings(XLNET_INPUTS_DOCSTRING.format("(batch_size, sequence_length)"))
+    @auto_docstring
     def forward(
         self,
         input_ids=None,
@@ -449,10 +424,7 @@ class XLNetForXMC(XLNetPreTrainedModel):
         }
 
 
-@add_start_docstrings(
-    """DistilBert Model with mutli-label classification head on top for XMC.\n""",
-    DISTILBERT_START_DOCSTRING,
-)
+@auto_docstring(custom_intro="""DistilBert Model with mutli-label classification head on top for XMC.\n""")
 class DistilBertForXMC(DistilBertPreTrainedModel):
     """
     Examples:
@@ -475,7 +447,7 @@ class DistilBertForXMC(DistilBertPreTrainedModel):
     def init_from(self, model):
         self.distilbert = model.distilbert
 
-    @add_start_docstrings(DISTILBERT_INPUTS_DOCSTRING.format("(batch_size, sequence_length)"))
+    @auto_docstring
     def forward(
         self,
         input_ids=None,

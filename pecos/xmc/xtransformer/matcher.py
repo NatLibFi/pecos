@@ -26,7 +26,8 @@ from pecos.utils import smat_util, torch_util
 from pecos.xmc import MLModel, MLProblem, PostProcessor
 from sklearn.preprocessing import normalize as sk_normalize
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
-from transformers import AdamW, AutoConfig, get_scheduler, BatchEncoding
+from torch.optim import AdamW
+from transformers import AutoConfig, get_scheduler, BatchEncoding
 
 from .module import XMCLabelTensorizer, XMCTextTensorizer, XMCTextDataset
 from .network import ENCODER_CLASSES, HingeLoss, TransformerLinearXMCHead
@@ -811,7 +812,7 @@ class TransformerMatcher(pecos.BaseClass):
                         cpred_csr = smat_util.sorted_csr(cpred_csr, only_topk=local_topk)
                         batch_cpred.append(cpred_csr)
                     else:
-                        cur_act_labels = csr_codes_next[inputs["instance_number"].cpu()]
+                        cur_act_labels = csr_codes_next[inputs["instance_number"].cpu().tolist()]
                         nnz_of_insts = cur_act_labels.indptr[1:] - cur_act_labels.indptr[:-1]
                         inst_idx = np.repeat(
                             np.arange(cur_batch_size, dtype=np.uint32), nnz_of_insts
