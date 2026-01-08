@@ -16,6 +16,12 @@ import subprocess
 import re
 import warnings
 
+# --- MODIFIED FOR ANNIF COMPATIBILITY ---
+# Attempt to import setuptools.distutils to handle build dependencies
+try:
+    from setuptools import distutils
+except ImportError:
+    import distutils
 
 class VersionHelper(object):
     """Helper class to figure out current package version from git tag."""
@@ -84,21 +90,22 @@ __version__ = "%s"
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-# Requirements
+# --- REQUIREMENTS MODIFIED FOR ANNIF ---
+# Annif uses Numpy ~= 2.2.6. We must ensure we build against NumPy 2.x headers.
 numpy_requires = [
-    'numpy>=1.19.5; python_version>="3.9"'
+    'numpy>=2.0.0; python_version>="3.10"'
 ]
 setup_requires = numpy_requires + [
     'pytest-runner'
 ]
 install_requires = numpy_requires + [
-    'scipy>=1.15.3',
-    'scikit-learn>=0.24.1',
-    'torch>=2.0; python_version>="3.9"',
-    'sentencepiece>=0.1.86,!=0.1.92', # 0.1.92 results in error for transformers
-    'transformers>=4.31.0; python_version>="3.9"',  # the minimal version supporting py3.9
-    'peft>=0.11.0; python_version>="3.9"',
-    'datasets>=2.19.1; python_version>="3.9"',
+    'scipy>=1.15.3',        # Compatible with Annif's ~=1.15.3
+    'scikit-learn>=1.0',    # Bumped for safety, Annif uses ~=1.7.1
+    'torch>=2.0; python_version>="3.10"',
+    'sentencepiece>=0.1.86,!=0.1.92', 
+    'transformers>=4.31.0; python_version>="3.10"',
+    'peft>=0.11.0; python_version>="3.10"',
+    'datasets>=2.19.1; python_version>="3.10"',
 ]
 
 # Fetch Numpy before building Numpy-dependent extension, if Numpy required version was not installed
@@ -114,10 +121,17 @@ else:
     manual_compile_args = []
 
 # Compile C/C++ extension
+# Ensure include_dirs can find the numpy headers
+try:
+    import numpy
+    np_include = numpy.get_include()
+except ImportError:
+    np_include = "/usr/include"
+
 ext_module = setuptools.Extension(
     "pecos.core.libpecos_float32",
     sources=["pecos/core/libpecos.cpp"],
-    include_dirs=["pecos/core", "/usr/include/", "/usr/local/include"],
+    include_dirs=["pecos/core", np_include, "/usr/include/", "/usr/local/include"],
     libraries=["gomp", "gcc", "stdc++"],
     extra_compile_args=["-fopenmp", "-O3", "-std=c++17"] + manual_compile_args,
 )
