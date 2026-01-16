@@ -103,7 +103,7 @@ install_requires = numpy_requires + [
     'scikit-learn>=1.0',    # Bumped for safety, Annif uses ~=1.7.1
     'torch>=2.0; python_version>="3.10"',
     'sentencepiece>=0.1.86,!=0.1.92', 
-    'transformers>=4.31.0; python_version>="3.10"',
+    'transformers>=4.49.0; python_version>="3.10"',
     'peft>=0.11.0; python_version>="3.10"',
     'datasets>=2.19.1; python_version>="3.10"',
 ]
