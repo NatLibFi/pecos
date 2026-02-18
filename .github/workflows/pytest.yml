@@ -49,7 +49,7 @@ jobs:
       run: |
         yum -y update
         yum -y groupinstall 'Development Tools'
-        amazon-linux-extras install epel -y
+        yum install spal-release -y
         yum install openblas-devel -y
     - name: Set up Python ${{ matrix.python-version }} via miniconda
       run: |
