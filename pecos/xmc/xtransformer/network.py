@@ -222,6 +222,7 @@ class BertForXMC(BertPreTrainedModel):
         self.bert = BertModel(config)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):

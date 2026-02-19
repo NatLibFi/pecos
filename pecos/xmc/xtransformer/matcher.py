@@ -521,8 +521,8 @@ class TransformerMatcher(pecos.BaseClass):
         os.environ["TOKENIZERS_PARALLELISM"] = "true"
         LOGGER.info("***** Encoding data len={} truncation={}*****".format(len(corpus), max_length))
         t_start = time.time()
-        feature_tensors = self.text_tokenizer.batch_encode_plus(
-            batch_text_or_text_pairs=corpus,
+        feature_tensors = self.text_tokenizer(
+            corpus,
             **self._get_tokenizer_config(max_length=max_length),
         )
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
