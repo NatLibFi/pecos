@@ -216,7 +216,7 @@ namespace ann {
             for (index_type m = 0; m < num_local_codebooks; m++) {
                 std::vector<index_type> indices(n_data, 0);
                 std::iota(indices.data(), indices.data() + n_data, 0);
-                std::random_shuffle(indices.data(), indices.data() + n_data);
+                std::shuffle(indices.data(), indices.data() + n_data, std::default_random_engine{});
                 for (index_type i = 0; i < sub_sample_points; i++) {
                     offset = (mem_index_type) indices[i] * global_dimension;
                     std::memcpy(
