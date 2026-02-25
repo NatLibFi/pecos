@@ -14,7 +14,7 @@ import numpy as np
 import scipy.sparse as smat
 
 
-def cs_matrix(arg1, mat_type, shape=None, dtype=None, check_contents=False):
+def cs_matrix(arg1, mat_type, shape=None, copy=None, dtype=None, check_contents=False):
     """Custom compressed sparse matrix constructor that allows indices and indptr to be stored in different types.
 
     Args:
@@ -44,14 +44,14 @@ def cs_matrix(arg1, mat_type, shape=None, dtype=None, check_contents=False):
         else:
             shape = ret._swap((major_dim, minor_dim))
 
-    ret.indices = np.array(indices, dtype=indices_dtype)
-    ret.indptr = np.array(indptr, dtype=indptr_dtype)
-    ret.data = np.array(data, dtype=dtype)
+    ret.indices = np.array(indices, copy=copy, dtype=indices_dtype)
+    ret.indptr = np.array(indptr, copy=copy, dtype=indptr_dtype)
+    ret.data = np.array(data, copy=copy, dtype=dtype)
 
     return ret
 
 
-def csr_matrix(arg1, shape=None, dtype=None):
+def csr_matrix(arg1, shape=None, dtype=None, copy=None):
     """Custom csr_matrix constructor that allows indices and indptr to be stored in different types.
 
     Args:
@@ -63,10 +63,10 @@ def csr_matrix(arg1, shape=None, dtype=None):
     Returns:
         csr_matrix
     """
-    return cs_matrix(arg1, smat.csr_matrix, shape=shape, dtype=dtype)
+    return cs_matrix(arg1, smat.csr_matrix, shape=shape, dtype=dtype, copy=copy)
 
 
-def csc_matrix(arg1, shape=None, dtype=None, copy=False):
+def csc_matrix(arg1, shape=None, dtype=None, copy=None):
     """Custom csc_matrix constructor that allows indices and indptr to be stored in different types.
 
     Args:
@@ -78,7 +78,7 @@ def csc_matrix(arg1, shape=None, dtype=None, copy=False):
     Returns:
         csc_matrix
     """
-    return cs_matrix(arg1, smat.csc_matrix, shape=shape, dtype=dtype)
+    return cs_matrix(arg1, smat.csc_matrix, shape=shape, dtype=dtype, copy=copy)
 
 
 def save_matrix(tgt, mat):
