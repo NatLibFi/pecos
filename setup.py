@@ -16,12 +16,6 @@ import subprocess
 import re
 import warnings
 
-# --- MODIFIED FOR ANNIF COMPATIBILITY ---
-# Attempt to import setuptools.distutils to handle build dependencies
-try:
-    from setuptools import distutils
-except ImportError:
-    import distutils
 
 class VersionHelper(object):
     """Helper class to figure out current package version from git tag."""

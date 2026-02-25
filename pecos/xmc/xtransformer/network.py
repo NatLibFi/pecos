@@ -33,7 +33,6 @@ from transformers import (
     DistilBertPreTrainedModel,
 )
 
-from transformers.utils.doc import add_start_docstrings
 from transformers.utils import auto_docstring
 from transformers.models.xlnet.modeling_xlnet import XLNetSequenceSummary as SequenceSummary
 from transformers.models.roberta.modeling_roberta import RobertaPreTrainedModel
