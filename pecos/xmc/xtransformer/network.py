@@ -242,6 +242,8 @@ class BertForXMC(BertPreTrainedModel):
         Args:
             label_embedding (`torch.FloatTensor` of shape `(num_labels, embedding_dim)`, *optional*):
                 Pre-computed label embeddings for the multi-label classification head.
+            head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
+                Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
         
         Returns:
           :obj:`dict` containing:
@@ -315,6 +317,8 @@ class RobertaForXMC(RobertaPreTrainedModel):
         Args:
             label_embedding (`torch.FloatTensor` of shape `(num_labels, embedding_dim)`, *optional*):
                 Pre-computed label embeddings for the multi-label classification head.
+            head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
+                Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
         
         Returns:
           :obj:`dict` containing:
@@ -410,6 +414,8 @@ class XLNetForXMC(XLNetPreTrainedModel):
                 Mask to avoid performing attention on padding token indices (alternative to attention_mask).
             label_embedding (`torch.FloatTensor` of shape `(num_labels, embedding_dim)`, *optional*):
                 Pre-computed label embeddings for the multi-label classification head.
+            head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
+                Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
         
         Returns:
           :obj:`dict` containing:
@@ -482,6 +488,8 @@ class DistilBertForXMC(DistilBertPreTrainedModel):
         Args:
             label_embedding (`torch.FloatTensor` of shape `(num_labels, embedding_dim)`, *optional*):
                 Pre-computed label embeddings for the multi-label classification head.
+            head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
+                Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
         
         Returns:
           :obj:`dict` containing:
