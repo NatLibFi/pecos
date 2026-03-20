@@ -44,13 +44,20 @@ jobs:
     container: amazonlinux:2023
 
     steps:
+    - name: Install required tools for checkout
+      run: |
+        yum -y update
+        yum -y install \
+          tar \
+          gzip
     - uses: actions/checkout@v6
     - name: Install dependencies
       run: |
         yum -y update
         yum -y groupinstall 'Development Tools'
-        yum install spal-release -y
-        yum install openblas-devel -y
+        yum -y install \
+          spal-release \
+          openblas-devel
     - name: Set up Python ${{ matrix.python-version }} via miniconda
       run: |
         curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh;
