@@ -297,6 +297,7 @@ class RobertaForXMC(RobertaPreTrainedModel):
         self.roberta = RobertaModel(config)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):
@@ -382,6 +383,7 @@ class XLNetForXMC(XLNetPreTrainedModel):
         self.transformer = XLNetModel(config)
         self.sequence_summary = SequenceSummary(config)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):
@@ -469,6 +471,7 @@ class DistilBertForXMC(DistilBertPreTrainedModel):
         self.distilbert = DistilBertModel(config)
         self.dropout = nn.Dropout(config.dropout)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):
