@@ -6,7 +6,7 @@ jobs:
   Ubuntu-Python-Unit-Test:
     name: Ubuntu Python Unit Tests
     strategy:
-      max-parallel: 4
+      max-parallel: 8
       fail-fast: false
       matrix:
         python-version: ["3.11", "3.12", "3.13", "3.14"]
