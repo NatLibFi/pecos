@@ -41,6 +41,7 @@ from transformers.utils import auto_docstring
 from transformers.models.xlnet.modeling_xlnet import XLNetSequenceSummary as SequenceSummary
 from transformers.models.roberta.modeling_roberta import RobertaPreTrainedModel
 
+
 class TransformerModelClass(object):
     """Utility class for representing a Transformer and tokenizer."""
 
@@ -248,7 +249,7 @@ class BertForXMC(BertPreTrainedModel):
                 Pre-computed label embeddings for the multi-label classification head.
             head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
                 Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
-        
+
         Returns:
           :obj:`dict` containing:
                 {'logits': (:obj:`torch.FloatTensor` of shape (batch_size, num_labels)) pred logits for each label,
@@ -282,7 +283,6 @@ class BertForXMC(BertPreTrainedModel):
         }
 
 
-
 @auto_docstring(custom_intro="""Roberta Model with mutli-label classification head on top for XMC.\n""")
 class RobertaForXMC(RobertaPreTrainedModel):
     """
@@ -301,6 +301,7 @@ class RobertaForXMC(RobertaPreTrainedModel):
         self.roberta = RobertaModel(config)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):
@@ -323,7 +324,7 @@ class RobertaForXMC(RobertaPreTrainedModel):
                 Pre-computed label embeddings for the multi-label classification head.
             head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
                 Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
-        
+
         Returns:
           :obj:`dict` containing:
                 {'logits': (:obj:`torch.FloatTensor` of shape (batch_size, num_labels)) pred logits for each label,
@@ -386,6 +387,7 @@ class XLNetForXMC(XLNetPreTrainedModel):
         self.transformer = XLNetModel(config)
         self.sequence_summary = SequenceSummary(config)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):
@@ -420,7 +422,7 @@ class XLNetForXMC(XLNetPreTrainedModel):
                 Pre-computed label embeddings for the multi-label classification head.
             head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
                 Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
-        
+
         Returns:
           :obj:`dict` containing:
                 {'logits': (:obj:`torch.FloatTensor` of shape (batch_size, num_labels)) pred logits for each label,
@@ -473,6 +475,7 @@ class DistilBertForXMC(DistilBertPreTrainedModel):
         self.distilbert = DistilBertModel(config)
         self.dropout = nn.Dropout(config.dropout)
 
+        self.post_init()
         self.init_weights()
 
     def init_from(self, model):
@@ -494,7 +497,7 @@ class DistilBertForXMC(DistilBertPreTrainedModel):
                 Pre-computed label embeddings for the multi-label classification head.
             head_mask (`torch.FloatTensor` of shape `(num_layers, num_heads)`, *optional*):
                 Mask to nullify selected heads of the self-attention modules. Mask values should be either 0 or 1.
-        
+
         Returns:
           :obj:`dict` containing:
                 {'logits': (:obj:`torch.FloatTensor` of shape (batch_size, num_labels)) pred logits for each label,

@@ -120,12 +120,18 @@ try:
     import numpy
     np_include = numpy.get_include()
 except ImportError:
-    np_include = "/usr/include"
+    # Fall back to system includes only; avoid duplicating /usr/include
+    np_include = None
+
+include_dirs = ["pecos/core"]
+if np_include:
+    include_dirs.append(np_include)
+include_dirs.extend(["/usr/include/", "/usr/local/include"])
 
 ext_module = setuptools.Extension(
     "pecos.core.libpecos_float32",
     sources=["pecos/core/libpecos.cpp"],
-    include_dirs=["pecos/core", np_include, "/usr/include/", "/usr/local/include"],
+    include_dirs=include_dirs,
     libraries=["gomp", "gcc", "stdc++"],
     extra_compile_args=["-fopenmp", "-O3", "-std=c++17"] + manual_compile_args,
 )

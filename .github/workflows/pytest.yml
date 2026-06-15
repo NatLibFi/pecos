@@ -1,23 +1,23 @@
 name: Python Unit Tests
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   Ubuntu-Python-Unit-Test:
     name: Ubuntu Python Unit Tests
     strategy:
-      max-parallel: 4
+      max-parallel: 8
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
-        platform: [ubuntu-20.04, ubuntu-22.04, ubuntu-22.04-arm]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        platform: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm]
 
     runs-on: ${{ matrix.platform }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
@@ -38,19 +38,26 @@ jobs:
       max-parallel: 4
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
 
     runs-on: ubuntu-latest
-    container: amazonlinux:2
+    container: amazonlinux:2023
 
     steps:
-    - uses: actions/checkout@v1
+    - name: Install required tools for checkout
+      run: |
+        yum -y update
+        yum -y install \
+          tar \
+          gzip
+    - uses: actions/checkout@v6
     - name: Install dependencies
       run: |
         yum -y update
         yum -y groupinstall 'Development Tools'
-        amazon-linux-extras install epel -y
-        yum install openblas-devel -y
+        yum -y install \
+          spal-release \
+          openblas-devel
     - name: Set up Python ${{ matrix.python-version }} via miniconda
       run: |
         curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh;
