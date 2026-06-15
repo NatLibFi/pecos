@@ -1,17 +1,22 @@
-# PECOS - Predictions for Enormous and Correlated Output Spaces
+# PECOS4ANNIF
 
+`pecos4annif` is a fork of Amazon's archived ![pecos](https://github.com/amzn/pecos) library "Predictions for Enormous and Correlated Output Spaces". 
+This fork is maintained for the purpoe of integrating pecos' Extreme Multi Label Classification Algorithm `X-Transformer` into the library cataloguing tool ![annif](https://github.com/NatLibFi/annif).
+
+<!-- 
+TODO: point to new PyPI-Release, once existent
 [![PyPi Latest Release](https://img.shields.io/pypi/v/libpecos)](https://img.shields.io/pypi/v/libpecos)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE) -->
 
 PECOS is a versatile and modular machine learning (ML) framework for fast learning and inference on problems with large output spaces, such as extreme multi-label ranking (XMR) and large-scale retrieval.
 PECOS' design is intentionally agnostic to the specific nature of the inputs and outputs as it is envisioned to be a general-purpose framework for multiple distinct applications.
 
-Given an input, PECOS identifies a small set (10-100) of relevant outputs from amongst an extremely large (~100MM) candidate set and ranks these outputs in terms of relevance. 
-
+Given an input, PECOS identifies a small set (10-100) of relevant outputs from amongst an extremely large (~100MM) candidate set and ranks these outputs in terms of relevance.
 
 ### Features
 
 #### Extreme Multi-label Ranking and Classification
+
 * X-Linear ([`pecos.xmc.xlinear`](pecos/xmc/xlinear/README.md)): recursive linear models learning to traverse an input from the root of a hierarchical label tree to a few leaf node clusters, and return top-k relevant labels within the clusters as predictions. See more details in the [PECOS paper (Yu et al., 2020)](https://arxiv.org/pdf/2010.05878.pdf).
   + fast real-time inference in C++
   + can handle 100MM output space
@@ -29,7 +34,7 @@ Given an input, PECOS identifies a small set (10-100) of relevant outputs from a
 
 ## Requirements and Installation
 
-* Python (3.9, 3.10, 3.11, 3.12)
+* Python (3.11 or higher)
 * Pip (>=19.3)
 
 See other dependencies in [`setup.py`](https://github.com/amzn/pecos/blob/mainline/setup.py#L135)
@@ -37,31 +42,31 @@ You should install PECOS in a [virtual environment](https://docs.python.org/3/li
 If you're unfamiliar with Python virtual environments, check out the [user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 
 ### Supporting Platforms
-* Ubuntu 20.04 and 22.04
-* Amazon Linux 2
+
+* Ubuntu 22.04
+
 
 ### Installation from Wheel
 
-PECOS can be installed using pip as follows:
+`pecos4annif` can be installed using pip as follows:
+
 ```bash
-python3 -m pip install libpecos
+python3 -m pip install pecos4annif
 ```
 
 ### Installation from Source
 
 #### Prerequisite builder tools
-* For Ubuntu (20.04, 22.04):
+
+* For Ubuntu (22.04):
 ``` bash
 sudo apt-get update && sudo apt-get install -y build-essential git python3 python3-distutils python3-venv
 ```
-* For Amazon Linux 2:
-``` bash
-sudo yum -y install python3 python3-devel python3-distutils python3-venv && sudo yum -y groupinstall 'Development Tools'
-```
+
 
 #### Install and develop locally
 ```bash
-git clone https://github.com/amzn/pecos
+git clone https://github.com/NatLibFi/pecos/
 cd pecos
 python3 -m pip install --editable ./
 ```
