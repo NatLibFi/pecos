@@ -137,10 +137,10 @@ ext_module = setuptools.Extension(
 )
 
 setuptools.setup(
-    name="libpecos",
+    name="pecos4annif",
     version=VersionHelper.get_version(),
     description="PECOS - Predictions for Enormous and Correlated Output Spaces",
-    url="https://github.com/amzn/pecos",
+    url="https://github.com/NatLibFi/pecos",
     author="Amazon.com, Inc.",
     license="Apache 2.0",
     packages=setuptools.find_packages(where="."),
