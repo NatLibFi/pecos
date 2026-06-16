@@ -1,7 +1,7 @@
 # PECOS4ANNIF
 
 `pecos4annif` is a fork of Amazon's archived ![pecos](https://github.com/amzn/pecos) library "Predictions for Enormous and Correlated Output Spaces". 
-This fork is maintained for the purpoe of integrating pecos' Extreme Multi Label Classification Algorithm `X-Transformer` into the library cataloguing tool ![annif](https://github.com/NatLibFi/annif).
+This fork is maintained for the purpose of integrating pecos' Extreme Multi Label Classification Algorithm `X-Transformer` into the library cataloguing tool ![annif](https://github.com/NatLibFi/annif).
 
 <!-- 
 TODO: point to new PyPI-Release, once existent
