@@ -11,7 +11,6 @@
 from mpi4py import MPI
 from pecos.distributed.comm.abs_dist_comm import DistComm
 
-
 MPI_COMM = MPI.COMM_WORLD
 MPI_RANK = MPI_COMM.Get_rank()
 MPI_SIZE = MPI_COMM.Get_size()

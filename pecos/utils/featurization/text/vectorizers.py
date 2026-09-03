@@ -18,7 +18,7 @@ import numpy as np
 from pecos.core import clib
 from sklearn.feature_extraction.text import HashingVectorizer, TfidfVectorizer
 
-vectorizer_dict = {}
+vectorizer_dict: dict[str, type] = {}
 
 LOGGER = logging.getLogger(__name__)
 
