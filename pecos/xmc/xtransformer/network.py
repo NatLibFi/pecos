@@ -204,7 +204,9 @@ class TransformerLinearXMCHead(nn.Module):
         return W_act, b_act
 
 
-@auto_docstring(custom_intro="""Bert Model with mutli-label classification head on top for XMC.\n""")
+@auto_docstring(
+    custom_intro="""Bert Model with mutli-label classification head on top for XMC.\n"""
+)
 class BertForXMC(BertPreTrainedModel):
     """
     Examples:
@@ -279,7 +281,9 @@ class BertForXMC(BertPreTrainedModel):
         }
 
 
-@auto_docstring(custom_intro="""Roberta Model with mutli-label classification head on top for XMC.\n""")
+@auto_docstring(
+    custom_intro="""Roberta Model with mutli-label classification head on top for XMC.\n"""
+)
 class RobertaForXMC(RobertaPreTrainedModel):
     """
     Examples:
@@ -355,7 +359,9 @@ class RobertaForXMC(RobertaPreTrainedModel):
         }
 
 
-@auto_docstring(custom_intro="""XLM-Roberta Model with mutli-label classification head on top for XMC.\n""")
+@auto_docstring(
+    custom_intro="""XLM-Roberta Model with mutli-label classification head on top for XMC.\n"""
+)
 class XLMRobertaForXMC(RobertaForXMC):
     """
     This class overrides :class:`RobertaForXMC`. Please check the superclass for the appropriate
@@ -365,7 +371,9 @@ class XLMRobertaForXMC(RobertaForXMC):
     config_class = XLMRobertaConfig  # type: ignore
 
 
-@auto_docstring(custom_intro="""XLNet Model with mutli-label classification head on top for XMC.\n""")
+@auto_docstring(
+    custom_intro="""XLNet Model with mutli-label classification head on top for XMC.\n"""
+)
 class XLNetForXMC(XLNetPreTrainedModel):
     """
     Examples:
@@ -453,7 +461,9 @@ class XLNetForXMC(XLNetPreTrainedModel):
         }
 
 
-@auto_docstring(custom_intro="""DistilBert Model with mutli-label classification head on top for XMC.\n""")
+@auto_docstring(
+    custom_intro="""DistilBert Model with mutli-label classification head on top for XMC.\n"""
+)
 class DistilBertForXMC(DistilBertPreTrainedModel):
     """
     Examples:

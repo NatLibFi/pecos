@@ -163,10 +163,8 @@ def do_train(args):
         LOGGER.info("Loaded from code-path: {}".format(args.code_path))
     else:
         cluster_chain = None
-        LOGGER.warning(
-            "Label partition not provided, falling back to one-versue-all training. \
-            For multi-resolution training, provide label partition with --code-path"
-        )
+        LOGGER.warning("Label partition not provided, falling back to one-versue-all training. \
+            For multi-resolution training, provide label partition with --code-path")
 
     trn_prob = MLProblemWithText(trn_corpus, Y_trn)
 

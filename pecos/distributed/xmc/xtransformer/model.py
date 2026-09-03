@@ -30,7 +30,6 @@ from pecos.xmc.xtransformer.network import TransformerLinearXMCHead
 from . import dist_trainer
 from .module import DeepSpeedUtils as ds_utils
 
-
 LOGGER = logging.getLogger(__name__)
 
 

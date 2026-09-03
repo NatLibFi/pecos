@@ -34,7 +34,6 @@ from pecos.xmr.reranker.trainer import (
 )
 from pecos.xmr.reranker.data_utils import RankingDataUtils
 
-
 logger = logging.getLogger(__name__)
 
 

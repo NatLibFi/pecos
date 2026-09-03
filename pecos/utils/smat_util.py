@@ -28,7 +28,7 @@ def cs_matrix(arg1, mat_type, shape=None, copy=None, dtype=None, check_contents=
     Returns:
         compressed sparse matrix in mat_type
     """
-    (data, indices, indptr) = arg1
+    data, indices, indptr = arg1
     indices_dtype = smat.get_index_dtype(indices, check_contents=check_contents)
     indptr_dtype = smat.get_index_dtype(indptr, check_contents=check_contents)
 

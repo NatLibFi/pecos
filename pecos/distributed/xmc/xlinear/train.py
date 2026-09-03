@@ -18,7 +18,6 @@ from pecos.utils.profile_util import MemInfo
 from pecos.xmc.xlinear.model import XLinearModel
 from pecos.xmc.xlinear.train import parse_arguments
 
-
 LOGGER = logging.getLogger(__name__)
 
 
