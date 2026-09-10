@@ -17,8 +17,7 @@ except ImportError:
 import dataclasses as dc
 import copy
 
-
-_class_mapping_ = {}
+_class_mapping_: dict[str, type] = {}
 
 
 class MetaClass(type):

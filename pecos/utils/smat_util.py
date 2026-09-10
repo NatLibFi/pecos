@@ -14,7 +14,7 @@ import numpy as np
 import scipy.sparse as smat
 
 
-def cs_matrix(arg1, mat_type, shape=None, dtype=None, copy=False, check_contents=False):
+def cs_matrix(arg1, mat_type, shape=None, copy=None, dtype=None, check_contents=False):
     """Custom compressed sparse matrix constructor that allows indices and indptr to be stored in different types.
 
     Args:
@@ -28,9 +28,9 @@ def cs_matrix(arg1, mat_type, shape=None, dtype=None, copy=False, check_contents
     Returns:
         compressed sparse matrix in mat_type
     """
-    (data, indices, indptr) = arg1
-    indices_dtype = smat.sputils.get_index_dtype(indices, check_contents=check_contents)
-    indptr_dtype = smat.sputils.get_index_dtype(indptr, check_contents=check_contents)
+    data, indices, indptr = arg1
+    indices_dtype = smat.get_index_dtype(indices, check_contents=check_contents)
+    indptr_dtype = smat.get_index_dtype(indptr, check_contents=check_contents)
 
     ret = mat_type(shape, dtype=dtype)
     # Read matrix dimensions given, if any
@@ -51,7 +51,7 @@ def cs_matrix(arg1, mat_type, shape=None, dtype=None, copy=False, check_contents
     return ret
 
 
-def csr_matrix(arg1, shape=None, dtype=None, copy=False):
+def csr_matrix(arg1, shape=None, dtype=None, copy=None):
     """Custom csr_matrix constructor that allows indices and indptr to be stored in different types.
 
     Args:
@@ -66,7 +66,7 @@ def csr_matrix(arg1, shape=None, dtype=None, copy=False):
     return cs_matrix(arg1, smat.csr_matrix, shape=shape, dtype=dtype, copy=copy)
 
 
-def csc_matrix(arg1, shape=None, dtype=None, copy=False):
+def csc_matrix(arg1, shape=None, dtype=None, copy=None):
     """Custom csc_matrix constructor that allows indices and indptr to be stored in different types.
 
     Args:
@@ -368,7 +368,7 @@ def vstack_csr(matrices, dtype=None):
     # infer result dtypes from inputs
     int32max = np.iinfo(np.int32).max
     if dtype is None:
-        dtype = smat.sputils.upcast(*[mat.dtype for mat in matrices])
+        dtype = np.result_type(*[mat.dtype for mat in matrices])
     indices_dtype = np.int64 if nr_cols > int32max else np.int32
     indptr_dtype = np.int64 if total_nnz > int32max else np.int32
 
@@ -417,7 +417,7 @@ def hstack_csr(matrices, dtype=None):
     # infer result dtypes from inputs
     int32max = np.iinfo(np.int32).max
     if dtype is None:
-        dtype = smat.sputils.upcast(*[mat.dtype for mat in matrices])
+        dtype = np.result_type(*[mat.dtype for mat in matrices])
     indices_dtype = np.int64 if nr_rows > int32max else np.int32
     indptr_dtype = np.int64 if total_nnz > int32max else np.int32
 
@@ -465,7 +465,7 @@ def block_diag_csr(matrices, dtype=None):
     # infer result dtypes from inputs
     int32max = np.iinfo(np.int32).max
     if dtype is None:
-        dtype = smat.sputils.upcast(*[mat.dtype for mat in matrices])
+        dtype = np.result_type(*[mat.dtype for mat in matrices])
     indices_dtype = np.int64 if total_rows > int32max else np.int32
     indptr_dtype = np.int64 if total_nnz > int32max else np.int32
 

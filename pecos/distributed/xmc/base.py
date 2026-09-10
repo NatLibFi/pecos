@@ -24,7 +24,6 @@ from pecos.utils.profile_util import MemInfo
 import math
 from copy import deepcopy
 
-
 LOGGER = logging.getLogger(__name__)
 
 

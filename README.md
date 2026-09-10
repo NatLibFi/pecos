@@ -37,13 +37,14 @@ Given an input, PECOS identifies a small set (10-100) of relevant outputs from a
 * Python (3.11 or higher)
 * Pip (>=19.3)
 
-See other dependencies in [`setup.py`](https://github.com/amzn/pecos/blob/mainline/setup.py#L135)
+See other dependencies in the `install_requires` list of [`setup.py`](setup.py).
 You should install PECOS in a [virtual environment](https://docs.python.org/3/library/venv.html).
 If you're unfamiliar with Python virtual environments, check out the [user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 
 ### Supporting Platforms
 
 * Ubuntu 22.04
+* Ubuntu 24.04
 
 
 ### Installation from Wheel
@@ -80,7 +81,7 @@ The eXtreme Multi-label Ranking (XMR) problem is defined by two matrices
 * instance-to-feature matrix `X`, of shape `N by D` in [`SciPy CSR format`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html)
 * instance-to-label matrix `Y`, of shape `N by L` in [`SciPy CSR format`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html)
 
-Some toy data matrices are available in the [`tst-data`](https://github.com/amzn/pecos/tree/mainline/test/tst-data/xmc/xlinear) folder. 
+Some toy data matrices are available in the [`tst-data`](https://github.com/NatLibFi/pecos/tree/mainline/test/tst-data/xmc/xlinear) folder. 
 
 PECOS constructs a hierarchical label tree and learns linear models recursively (e.g., XR-Linear):
 ```python
